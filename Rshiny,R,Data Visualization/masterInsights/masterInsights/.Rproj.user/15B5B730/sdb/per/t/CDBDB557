@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(RMySQL)\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\n\nshinyServer(function(input, output,session) {\n\n  #mydb = dbConnect(MySQL(), user='root', password='d@em0n51',\n   #                dbname='parser', host='localhost')\n  #rs = dbSendQuery(mydb, \"select * from master_copy\")\n  #data.frame <- fetch(rs , n = 124359)\n  data.frame<-read.csv(\"master_10000.csv\",header = T)\n  \n  datsetFrame <- data.frame[c(\"terminatingOperator\",\"terminatingCircle\",\"procDate\")]\n  \n  datsetFrame$procDate = as.Date(datsetFrame$procDate)\n  \n  observe({\n    \n    y<- unique(datsetFrame$terminatingOperator)\n    \n    updateSelectInput(session,\"terminatingOperator\",label = \"Select the Terminating Operator\",choices = y,\n                      selected = \"MTNL\")\n    })\n  \n  observe({\n    \n    x<- unique(datsetFrame$terminatingCircle)\n    \n    updateSelectInput(session,\"terminatingCircle\",label = \"Select the Terminating Circle\",choices =x,\n                      selected = \"Mumbai\")\n  })\n  \n   \n  \n  \n  output$distPlot <- renderPlot({\n    \n    datsetFrame <- datsetFrame[which(#datsetFrame$terminatingOperator == input$terminatingOperator \n                                      datsetFrame$terminatingCircle == input$terminatingCircle\n                                   # & datsetFrame$procDate <= as.Date(input$dateRangeID[2])\n                                    #& datsetFrame$procDate >= as.Date(input$dateRangeID[1])\n                                     ),]\n    ###\n    \n    g<- ggplot(datsetFrame %>% count(terminatingOperator, terminatingCircle) %>%    # Group by region and species, then count number in each group\n             mutate(pct=n/sum(n),               # Calculate percent within each region\n                    ypos = cumsum(n) - 0.5*n),  # Calculate label positions\n           aes(terminatingOperator, n, fill=terminatingCircle)) +\n      geom_bar(stat=\"identity\", width = 0.2) + coord_flip() +\n    geom_text(aes(label=n),  vjust=-1.1)\n    \n    \n    \n     # geom_text(aes(label=paste0(sprintf(\"%1.1f\", pct*100),\"%\"), y=ypos))\n      g\n  })\n\n})\n",
+    "created" : 1498711805555.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1866950363",
+    "id" : "CDBDB557",
+    "lastKnownWriteTime" : 1499084633,
+    "last_content_update" : 1499084633574,
+    "path" : "~/dashboard/masterInsights/masterInsights/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

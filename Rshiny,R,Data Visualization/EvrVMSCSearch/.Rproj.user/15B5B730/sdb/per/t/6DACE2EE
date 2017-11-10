@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"EVR Report\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(width = 3,\n      selectInput(inputId = \"circle\", label = \"select the terminating cirle\",\n                  choices = c(\"Mumbai\",  \"Maharastra\")),\n     selectInput(inputId = \"msgType\",label = \"select the Message Type\",choices = c(\"UNDELIV\",\"DELIVRD\")\n                 ,selected = \"DELIVRD\"),\n      dateRangeInput(inputId = \"dateRange\",\"Date\")\n      ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      #dataTableOutput(\"distPlot\")\n      tabsetPanel(\n       # tabPanel(\"Plot(Message status delivered)\",plotOutput(\"plot2\")),\n        tabPanel(\"Plot (message status )\",plotOutput (\"plot1\")),\n        tabPanel(\"summary\",dataTableOutput(\"table\"))\n      )\n    )\n  )\n))\n",
+    "created" : 1499849426646.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4243042138",
+    "id" : "6DACE2EE",
+    "lastKnownWriteTime" : 1499943613,
+    "last_content_update" : 1499943613976,
+    "path" : "~/dashboard/EvrVMSCSearch/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

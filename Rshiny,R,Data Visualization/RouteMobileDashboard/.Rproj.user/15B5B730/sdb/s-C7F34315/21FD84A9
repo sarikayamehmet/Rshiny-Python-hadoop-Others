@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nlibrary(leaflet)\n\nshinyUI(fluidPage(\n  \n  # Application title\n  titlePanel(\"Dashboard\"),\n  \n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel( width = 3 ,\n      selectInput(\"senderId\",label = \"select the SenderID\", choices = list(\"DM-BOISTR\",\"DM-ICICIL\",\"All\"),\n                  selected = \"DM-BOISTR\") ,\n    selectInput(\"interval\",\"Refresh interval\",choices = c(\n      \"30 seconds\" = 30,\n      \"1 minute \" =  60,\n      \"2 minute \" = 120,\n      \"5 minute \" = 300,\n      \"10 minute\"  = 600\n    ),\n    selected = \"600\"\n    ),\n      selectInput(inputId = \"terminatingCircle\", label = \"Select the Terminating Circle\",\n                  choices = c(\"Delhi\",\"Mumbai\",\"All\")),\n      \n      dateRangeInput(inputId =\"dateRangeID\",label = \"Date\",format = \"yyyy-mm-dd\"),\n         actionButton(\"refresh\",\"Refresh Now\")\n    ),\n    # Show a plot of the generated distribution\n    mainPanel(\n      tabsetPanel(\n        tabPanel(\"MAP(Message delivered state wise)\",leafletOutput(\"mymap\")),\n        tabPanel(\" Message delivered in Terminating Circle \",downloadButton(outputId = \"down1\", label = \"Download \"),plotOutput(\"plot1\")#,downloadButton(outputId = \"down1\", label = \"Download \")\n                 ),\n        tabPanel(\"Sender's message delivered\",downloadButton(outputId = \"down2\", label = \"Download \"),plotOutput(\"plot3\")# ,downloadButton(outputId =\"down1\", label = \"Download \")\n                 ),\n        tabPanel(\"msgType used by sender\",downloadButton(outputId = \"down3\", label = \"Download \"),plotOutput(\"plot4\") #,downloadButton(outputId = \"down2\",label = \"Download \")\n                 ),\n        tabPanel(\"Terminating circle Analysis\",downloadButton(outputId = \"down4\", label = \"Download \"),plotOutput(\"plot2\")# ,downloadButton(outputId = \"down3\",label = \"Download \")\n                 ), \n        tabPanel(\"summary\", dataTableOutput(\"table\"))\n      )\n    )\n  )\n)\n)\n\n",
+    "created" : 1499417912396.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2117518733",
+    "id" : "21FD84A9",
+    "lastKnownWriteTime" : 1499428201,
+    "last_content_update" : 1499428201763,
+    "path" : "~/dashboard/RouteMobileDashboard/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

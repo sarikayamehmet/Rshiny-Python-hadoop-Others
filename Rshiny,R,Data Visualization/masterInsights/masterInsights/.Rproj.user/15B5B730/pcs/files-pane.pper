@@ -1,0 +1,9 @@
+{
+    "path" : "~/dashboard/masterInsights/masterInsights",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

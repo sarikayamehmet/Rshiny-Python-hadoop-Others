@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\nlibrary(ggmap)\nlibrary(leaflet)\nlibrary(dplyr)\norigAddress <- read.csv(\"master_10000.csv\",header = T)\na<- origAddress\na<-data.frame(a$terminatingOperator,a$terminatingCircle)\nb<-aggregate(a$a.terminatingOperator~a$a.terminatingCircle,a,FUN = function(x)length(unique(x)))\nb<-as.data.frame(b)\n\nfor (i in 1:nrow(b )){\n  result <- geocode(as.character(a$a.terminatingCircle),output = \"latlona\", source = \"google\")\n  #originadd <- gettingUniqueData[i]\n  b$long[i] <- as.numeric(result[1])\n  b$latt[i] <- as.numeric(result[2])\n  #add[i] <- as.character(result[3])\n}\n\nm <-leaflet(b) %>% addTiles() %>%\n  addMarkers(~long , ~latt) %>%\naddTiles() \n\n\n",
+    "created" : 1498820009270.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2928461835",
+    "id" : "C408204D",
+    "lastKnownWriteTime" : 1499059858,
+    "last_content_update" : 1499059858380,
+    "path" : "~/leafletMap.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
