@@ -1,0 +1,185 @@
+create table customerProfile_TEST (dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING , lst_am_trans STRING ,pot_acc_bal STRING , cust_choice_pattern STRING) CLUSTERED BY( senderId ) into 32 buckets 
+ ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' with serdeproperties ("separatorChar" = ",", "quoteChar"     = "\"" ) STORED AS TEXTFILE ;
+load data inpath '/DATA/msg-content.csv' into table  customerProfile_TEST;
+//load data inpath '/tmp/DATA/msg-content.csv' into table  customerProfile_TEST
+
+
+create table customerProfile_TEST_ORC (dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING ,lst_am_trans STRING ,pot_acc_bal STRING , cust_choice_pattern STRING) CLUSTERED BY( mapId ) into 32 buckets row format delimited fields terminated by ',' stored as ORC TBLPROPERTIES ('transactional' = 'true');
+
+CREATE  temporary FUNCTION dateVALUE1 as 'dateparserHive' 
+USING JAR 'hdfs:////DATA/dateparser.jar';
+////USING JAR 'hdfs:////tmp/DATA/JAR/dateparser.jar';	
+
+
+create temporary function toLower as 'textClean' 
+using jar 'hdfs:////DATA/textClean.jar';
+//using jar 'hdfs:////tmp/DATA/JAR/textClean.jar'
+
+insert into  table customerProfile_TEST_ORC   select dateVALUE1(dateValue) ,senderId,mapId,msgContent,msgIsdn,gen_cat , lst_am_trans , pot_acc_bal , cust_choice_pattern from  customerProfile_TEST;
+
+customerProfile_TEST_ORC_strConvLow
+
+create table customerProfile_TEST_ORC_strConvLow (dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING ,lst_am_trans STRING ,pot_acc_bal STRING , cust_choice_pattern STRING) CLUSTERED BY( mapId ) into 32 buckets row format delimited fields terminated by ',' stored as ORC TBLPROPERTIES ('transactional' = 'true');
+
+insert into table customerProfile_TEST_ORC_strConvLow select dateValue,senderId,mapId,toLower(msgContent),
+msgIsdn,gen_cat , lst_am_trans , pot_acc_bal , cust_choice_pattern from  customerProfile_TEST_ORC;
+
+
+
+
+
+
+/* where msgContent not like '0%' ;*/
+
+
+'''Removed the unwanted variables like :-
+0C2A0C4D0C300C3F0C2F0C2E0C480C2800200C350C3F0C280C3F0C2F0C4B0C170C260C3E0C300C410C280C3F0C150C3F0020002C00200C240C470C260C3F002E00320032002F00300038002F003100370C28002C00200C380C300C4D0C350C400C380C4100200C280C020C2C0C300C4D0020003A002000310034003400320037003100320031';'''
+
+
+update customerProfile_TEST_ORC_strConvLow set gen_cat = 'BANKING' where senderid = 'DM-022658' or
+senderid = 'DM-AAOJIK' or senderid ='DM-AARYAN' or
+senderid ='DM-AAVIN' or
+senderid ='DM-ABDRBY' or
+senderid ='DM-ABGSSP' or
+senderid  ='DM-ACCINF' or
+senderid ='DM-ACCNTR' or
+senderid ='DM-ACEBNK' or
+senderid ='DM-ACTIVE' or
+senderid ='DM-ADBZAR' or
+senderid ='DM-ADDNUM' or
+senderid ='DM-ADOBEX' or
+senderid ='DM-ADXPRT' or
+senderid ='DM-AGRIBZ' or
+senderid ='DM-AGSBOS' or
+senderid ='DM-AIPLMG' or
+senderid ='DM-AIPLTD' or
+senderid ='DM-AIRNET' or
+senderid ='DM-AIZZAS' or
+senderid ='DM-AJURAM' or
+senderid ='DM-ALBANK' or
+senderid ='DM-ALERTS' or
+senderid ='DM-ALIPAY' or
+senderid ='DM-ALLCEL' or
+senderid ='DM-ALPFLY' or
+senderid ='DM-ALTIME' or
+senderid ='DM-AMAZON' or
+senderid = 'DM-AMBIKA' or
+senderid = 'DM-AMBVSN' or
+senderid ='DM-AMOGHA' or
+senderid = 'DM-AMRATP' or
+senderid = 'DM-AMSPWD' or
+senderid ='DM-AMTRON' or
+senderid = 'DM-ANNAPO' or
+senderid ='DM-ANTIAV' or
+senderid = 'DM-APEXjp' or
+senderid ='DM-APNBNK' or
+senderid ='DM-APOLLO' or
+senderid ='DM-APPLCZ' or
+senderid ='DM-APTAXI' or
+senderid ='DM-APTITO' or
+senderid ='DM-AROMAA' or
+senderid ='DM-ARYACS' or
+senderid = 'DM-ASHOKP' or
+senderid = 'DM-ASIANF' or
+senderid ='DM-ASIANH';
+// created genra_cat => category
+
+
+
+update customerProfile_TEST_ORC_strConvLow set gen_cat = 'spam' where msgContent  like '0%';
+
+update customerProfile_TEST_ORC_strConvLow set gen_cat = 'card_pay' where  msgcontent like '%transaction%' or  msgcontent like '%xxx%' or msgcontent like 'payment' or msgcontent like '%debited%' ; 
+
+update customerProfile_TEST_ORC_strConvLow set gen_cat = 'Banking_rec' where  msgcontent like '%transaction%' or msgcontent like '%a/c%' or msgcontent like '%credited%'  or msgcontent like '%account%'  ; 
+
+
+update customerProfile_TEST_ORC_strConvLow set gen_cat = 'online_trans' where msgcontent like 'otp%' or msgcontent like '%otp%'; 
+
+
+
+/* Original Data
+update customerProfile_TEST_ORC_strConvLow set gen_cat = 'online_trans' where msgcontent like 'otp%' or msgcontent like '%transaction%' or msgcontent like '%a/c%' or msgcontent like '%credited%' or msgcontent like '%xxx%' or msgcontent like '%balance%' or msgcontent like 'payment' or msgcontent like '%account%' or msgcontent like '%debited%' ; 
+*/
+
+
+ 	
+
+/// creating the another table for calculating the money in the account
+
+
+
+create temporary function get_money as 'onlineTransAmount_old'
+USING JAR 'hdfs:////DATA/onlineTransAmount_old.jar';
+
+create temporary function get_accbal as 'accBalAmount_old'
+using jar 'hdfs:////DATA/accBalAmount_old.jar';
+
+	create table customerprofile_test_orc_getMoneyInfo1 (dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING ,lst_am_trans STRING ,pot_acc_bal STRING , cust_choice_pattern STRING) CLUSTERED BY( mapId ) into 32 buckets row format delimited fields terminated by ',' stored as ORC TBLPROPERTIES ('transactional' = 'true');
+
+//customerprofile_test_orc_getMoneyInfo
+insert into table customerprofile_test_orc_getMoneyInfo1 select dateValue ,senderId,mapId,msgContent,msgIsdn,gen_cat , get_money(msgcontent) , get_accbal(msgcontent) , cust_choice_pattern
+from customerProfile_TEST_ORC_strConvLow where msgcontent like '%clrbal%' or msgcontent like '%rs.%' or msgcontent like '%acbal%' or msgcontent like '%bal%' or msgcontent like '%inr%' or msgcontent like '%rs%' and msgContent not like 'otp%'  or msgcontent like '%salary%' and msgcontent not like '%msgcontent%' and msgcontent not like '%insurance%' and   msgcontent not like '%pnr%' and msgcontent not like 'pnr%';
+
+// adding the jar file which will replace all the null 
+
+create temporary function conv_null as 'addOther'
+USING JAR 'hdfs:////DATA/addOther.jar';
+
+
+create table customerprofile_test_getMoneyInfo1 (dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING ,lst_am_trans STRING ,pot_acc_bal STRING , cust_choice_pattern STRING);
+
+
+insert into table customerprofile_test_getMoneyInfo1 select dateValue, senderId , mapId ,msgContent,
+msgIsdn,gen_cat,lst_am_trans , pot_acc_bal , cust_choice_pattern from customerprofile_test_orc_getMoneyInfo1 ;
+
+select * from customerprofile_test_getMoneyInfo1 where msgcontent like '%clrbal%' or msgcontent like '%rs.%' or msgcontent like '%acbal%' or msgcontent like '%bal%' or msgcontent like '%inr%' or msgcontent like '%rs%' and msgContent not like 'otp%'  or msgcontent like '%salary%' and msgcontent not like '%msgcontent%' and msgcontent not like '%insurance%' and   msgcontent not like '%pnr%' and msgcontent not like 'pnr%';
+
+
+
+
+
+
+update customerprofile_test_orc_getMoneyInfo1 set cust_choice_pattern = 'low_purchasing_power' where
+msgcontent like 'otp%' or msgcontent like '%credited%' or msgcontent like '%debited%' or msgcontent like '%card%' and  cast(lst_am_trans as int) < 150;
+
+update customerprofile_test_orc_getMoneyInfo1 set cust_choice_pattern = 'medium_purchasing_parity' where msgcontent like 'otp%' or msgcontent like '%credited%' or msgcontent like '%debited%'  and cast (lst_am_trans as int) > 150 and cast(lst_am_trans as int)<2000;
+
+update customerprofile_test_orc_getMoneyInfo1 set cust_choice_pattern = 'high_purchasing_parity' where msgcontent like 'otp%' or msgcontent like '%credited%' or msgcontent like '%debited%'  and cast(lst_am_trans as int)>2000;
+
+
+select msgContent,msgIsdn,gen_cat,lst_am_trans,pot_acc_bal,cust_choice_pattern from customerprofile_test_orc_getMoneyInfo1 limit 10000;
+
+create table customerprofile_getMoneyInfo_sp(dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING ,lst_am_trans STRING ,pot_acc_bal STRING , cust_choice_pattern STRING);
+
+insert into table customerprofile_getMoneyInfo_sp select * from customerprofile_test_orc_getMoneyInfo1;
+
+
+create table customerProfile_TEST_ORC3 (dateValue STRING ,senderId STRING, mapId STRING  , msgContent  STRING ,msgIsdn STRING ,gen_cat STRING , acc_info STRING ,acc_bal STRING , cust_choice_pattern STRING) CLUSTERED BY( mapId ) into 32 buckets row format delimited fields terminated by ',' stored as ORC TBLPROPERTIES ('transactional' = 'true');
+
+
+
+insert into table customerprofile_test_orc3 select dateValue ,senderId,mapId,msgContent,msgIsdn,gen_cat , acc_info , get_money(msgcontent) , cust_choice_pattern
+from customerprofile_test_orc_getMoneyInfo where msgcontent like '%clrbal%' or msgcontent like '%rs.%' or msgcontent like '%acbal%' or msgcontent like '%bal%' or msgcontent like '%inr%' or msgcontent like '%rs%' and msgContent not like 'otp%'  or msgcontent like '%salary%' and msgcontent not like '%msgcontent%' and msgcontent not like '%insurance%' ;
+
+
+select datevalue ,msgContent,msgIsdn,gen_cat,acc_info
+
+///remove the message which have the get message
+
+///Exception Type-1
+ account no: xxxxxxx4425     balance : rs. 13500.00(cr) 1.31/08/17  11500.00(cr) 2.16/08/17  10000.00(dr) 3.05/08/17  11500.00(cr) 4.20/07/17  7500.00(dr)       online_trnsaction       13500   13500.00        NULL
+///Exception Type-2
+ your account xxxxxxx0133 is credited by rs. 14361.11 on 31-08-2017 22:08:07 by transfer. balance is rs.-1005277.78.     online_trnsaction      14361    NULL    high_purchasing_parity
+///Exception Type-3
+  congratulations! youve received 50 inr from 966559342856.thank you for using stc.       NULL    9       NULL    NULL
+
+///Exception Type-4 -- work absolutely fine
+2017-01-31 22:47:53     your a/c od/xxxxx236 is debited rs.430.00 on 31/08/2017 by transfer.clear balance rs.-128044.59 info:to int.dr. 01/08/2017-31/08/2017   online_trnsaction       430.00  128044.59       high_purchasing_parity
+
+
+///Exception Type-5 
+2017-01-31 23:00:22     your account xxxxxxx2403 is credited by rs. 1501.00 on 31-08-2017 22:08:43 by transfer. balance is rs.-27500.00.        online_trnsaction      1501.0   NULL    high_purchasing_parity
+
+//Exception Type-6  need balance and count in credit  amount if balance and  rs are both together 
+//then it is available balance
+2017-01-31 23:05:40     theavailablebalanceinyouraccountis:rs.36731.35  online_trnsaction       36731.3 NULL    NULL

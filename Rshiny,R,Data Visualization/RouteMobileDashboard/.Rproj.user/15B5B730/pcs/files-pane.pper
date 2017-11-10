@@ -1,9 +1,0 @@
-{
-    "path" : "~/dashboard/RouteMobileDashboard",
-    "sortOrder" : [
-        {
-            "ascending" : true,
-            "columnIndex" : 2
-        }
-    ]
-}

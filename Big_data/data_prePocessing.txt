@@ -1,0 +1,25 @@
+
+create table customerProfile_TEST (dateValue STRING , senderId STRING , mapId STRING,msgContent  STRING ,  msgIsdn string ,   cat string) 
+ CLUSTERED BY( mapId ) into 32 buckets 
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+with serdeproperties (
+   "separatorChar" = ",",
+   "quoteChar"     = "\""   
+  ) STORED AS TEXTFILE ;
+load data inpath '/tmp/DATA/TEST/' into table  customerProfile_TEST  ;
+
+create table customerProfile_TEST_ORC (dateValue STRING , mapId STRING  , msgContent  STRING ,msgIsdn STRING ,cat STRING)  
+  PARTITIONED  BY ( senderId STRING)  CLUSTERED BY( mapId ) into 32 buckets 
+row format delimited fields terminated by ',' stored as ORC TBLPROPERTIES ('transactional' = 'true');
+
+
+ SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+CREATE  temporary FUNCTION dateVALUE1 as 'dateparserHive' 
+USING JAR 'hdfs:////tmp/DATA/TEST/dateparser.jar
+
+insert into  table customerProfile_TEST_ORC PARTITION (senderId)  select * from  customerProfile_TEST ;
+
+update customerProfile_TEST_ORC set cat = 'Banking' where cat  like "%YOUR ACCOUNT XXXXXXX%";
+								    	

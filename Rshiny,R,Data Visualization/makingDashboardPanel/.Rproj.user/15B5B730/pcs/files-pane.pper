@@ -1,9 +1,0 @@
-{
-    "path" : "~/dashboard/makingDashboardPanel",
-    "sortOrder" : [
-        {
-            "ascending" : true,
-            "columnIndex" : 2
-        }
-    ]
-}

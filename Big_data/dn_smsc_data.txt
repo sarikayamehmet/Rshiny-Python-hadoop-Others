@@ -1,0 +1,10 @@
+create table smsc_data1(procDate STRING , originatingOperator STRING ,originatingCircle STRING , 
+						vmsc STRING ,vmsc_lookup STRING ,terminatingOperator STRING ,terminatingCircle STRING ,
+						senderId STRING, 
+msgType STRING ,mapid STRING ,procMonth STRING ,time  STRING ,milisec STRING ,IMSI STRING , imsi_lookup  STRING ,
+						actualBPartyCircle STRING, actualBPartyOperator STRING , smc STRING ,message_len string,
+					   sucess_timestamp timestamp , file_name STRING , calledBParty STRING) 
+row format delimited fields terminated by ','; 
+
+
+LOAD DATA INPATH '/tmp/DATA/smsc_data/'  INTO TABLE smsc_data1; 

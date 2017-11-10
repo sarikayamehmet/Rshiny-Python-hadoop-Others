@@ -1,0 +1,9 @@
+spark-submit --master yarn-client --conf spark.pyspark.virtualenv.enabled=true  --conf spark.pyspark.virtualenv.type=native --conf spark.pyspark.virtualenv.requirements=/root/akash/requirements1.txt --conf spark.pyspark.virtualenv.bin.path=/usr/bin/virtualenv --conf spark.pyspark.python=/usr/bin/python2 spark_virtualenv1.py
+
+
+
+spark-submit --master yarn-client --conf spark.pyspark.virtualenv.enabled=true  --conf spark.pyspark.virtualenv.type=native --conf spark.pyspark.virtualenv.requirements=/DATA/requirements.txt --conf spark.pyspark.virtualenv.bin.path=/usr/bin/virtualenv --conf spark.pyspark.python=/usr/bin/python2 spark_virtualenv.py
+
+//Installing the external library in pyspark
+https://community.hortonworks.com/articles/104949/using-virtualenv-with-pyspark-1.html
+

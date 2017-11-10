@@ -1,9 +1,0 @@
-{
-    "path" : "~/dashboard/leaflet",
-    "sortOrder" : [
-        {
-            "ascending" : true,
-            "columnIndex" : 2
-        }
-    ]
-}
