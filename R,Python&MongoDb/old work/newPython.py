@@ -1,0 +1,72 @@
+import pymongo
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+db = client.EVR
+collection = db['test-collection']
+
+
+
+user_doc = { "MAP_MESSAGE_ID":(2401061723570062753862),
+	"SMDESTADDR": 919850494908,
+	"NODE_ID": 3,
+	"VALIDITY_PERIOD": 170602045700,
+	"APP_NUM": 0,
+	"SM_DETAIL": {
+        "EVENTVAR": [{
+			"EVENT": 6,
+			"CAUSEVAR": [{
+				"CAUSE": 9,
+				"SCTS": [170601235701],
+				"SCMSGREF": [36124594908],
+				"RECORDTYPE": [23],
+				"LOGGINGTIME": 2017060123570155,
+				"DEST_IMSI": 404201366615040,
+				"DEST_VMSCADDR": 919823000800,
+				"NUMOFDELATTEMPTS": 1,
+				"SMORIGADDR": 1020,
+				"SMDESTADDR": 919819507047,
+				"ROUTING_TYPR": 2,
+				"ACCESSMETHOD": [1],
+				"DISPLAYADDRVALUE": "DM-IGLDEL",
+				"ORIGADDR_TYPE": 5,
+				"DESTADDR_TYPE": 1,
+				"ORIG_IMSI": "N.A",
+				"ORIG_VMSC": "N.A",
+				"MSG_LEN": [54],
+				"PID": 0,
+				"DCS": 0,
+				"DSR_REQ": [62],
+				"PRIORITY": 4,
+				"CONCAT_INFO": "140-2-2",
+				"CLIENT_ID": 39,
+				"SUBS_TYPE": 1,
+				"APP_NUM": 0,
+				"VALIDITY_PERIOD": [170602045700],
+				"DIALLED_NUM": 919891208889,
+				"ROUTING_TYPE": 2
+			}]
+		}]
+	},
+	"SR_DETAIL": {
+		"SCTS": 170601235700,
+		"SCMSGREF": 2008013,
+		"EVENTVAR": [{
+			"EVENT": 6,
+			"SCTS": 170601235700,
+			"SCMSGREF": 2008013,
+			"CAUSEVAR": [{
+				"CAUSE": 268,
+				"ACCESSMETHOD": [5],
+				"SRORIGADDR": [918422003768],
+				"SRDESTADDR": 1020,
+				"LOGGINGIME": 2017060123570666,
+				"MSGID": 150678603768,
+				"SR_CTS": 170601235706,
+				"SM_STATUS": ["DELIVRD"],
+				"SM_ERRORCODE": [0],
+				"DIALLED_NUM": 918422003768,
+				"LOGGINGTIME": 2017060123570657
+			}]
+		}]}}})
+
+db.EVR.insert(user_doc,safe = True)

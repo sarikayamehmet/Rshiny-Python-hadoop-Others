@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>DASHBETA</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+</head>
+<body>
+<div class="row">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">SMSC INSIGHTS DASHBOARD</a>
+			</div>
+	
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<form class="navbar-form navbar-left">
+					<button type="button" class="btn btn-default" onclick="loadDoc()">Change Content</button>	
+				</form>
+				<!--<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+				</ul>-->
+				<form class="navbar-form navbar-left">
+					<button type="submit" class="btn btn-default">AKASH</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Link</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li><a href="#">Separated link</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div>
+	</nav>
+</div>
+
+<div class="conatiner">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
+			<canvas id="terminatingCircle" ></canvas>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
+			<canvas id="line-chart" ></canvas>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 60px;">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
+			<canvas id="messageByOperator" ></canvas>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-1">
+			<canvas id="polar-chart" ></canvas>
+		</div>
+	</div>
+</div>
+
+<!--
+<div style="position:absolute; top:60px; left:10px; width:500px; height:500px;">
+<canvas id="terminatingCircle" ></canvas>
+</div>
+<div style="position:absolute;top:60px;right:10px;width:500px;height: 500px;">
+<canvas id = "line-chart"></canvas>
+</div>
+<div style = "position: absolute;bottom:-350px; left:10px;width: 500px;height: 500px;">
+<canvas id = "messageByOperator"></canvas>
+</div>
+<div style = "position:absolute;bottom:-350px;right:10px;width: 500px;height: 500px;">
+<canvas id = "polar-chart"></canvas>
+-->
+<!-- creating the dynamic list-->
+
+<script >
+
+// jQuery that listens for the select list change, makes the AJAX call and populates the target select
+/*$(document).ready(function($) {
+  var list_target_id = 'list-target'; //first select list ID
+  var list_select_id = 'list-select'; //second select list ID
+  var initial_target_html = '<option value="">Please select a colour...</option>'; //Initial prompt for target select
+ 
+  $('#'+list_target_id).html(initial_target_html); //Give the target select the prompt option
+ 
+  $('#'+list_select_id).change(function(e) {
+    //Grab the chosen value on first select list change
+    var selectvalue = $(this).val();
+ 
+    //Display 'loading' status in the target select list
+    $('#'+list_target_id).html('<option value="">Loading...</option>');
+ 
+    if (selectvalue == "") {
+        //Display initial prompt in target select if blank value selected
+       $('#'+list_target_id).html(initial_target_html);
+    } else {
+      //Make AJAX request, using the selected value as the GET
+      $.ajax({url: 'ajax-getvalues.php?svalue='+selectvalue,
+             success: function(output) {
+                //alert(output);
+                $('#'+list_target_id).html(output);
+            },
+          error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + " "+ thrownError);
+          }});
+        }
+    });
+});*/
+function loadDoc(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status== 200){
+			document.getElementById("demo").innerHTML = responseText;
+		}
+	};
+	xhttp.open("GET","NAME_OF_THE_FILE",true);
+	xhttp.send();
+}
+
+
+	window.onload = function (){
+		var ctx = document.getElementById("terminatingCircle").getContext('2d');
+		var mychart = new Chart(ctx,{
+			type : 'bar',
+			data:{ /// main point for inserting the data 
+				labels:["Mumbai","Maharstea","a","b","c"],//axis label where the plot id going to be places
+                datasets:[{
+                	label : 'Terminating circle analysis', //Heading of the graph ex TERMINATING CIRCLE
+                	data : [90,89,100,120,178],// array of data need to be inserted in these places
+                	//backgroundColor = [],//optional value for the background colour
+                	//borderColor = [],//optional fix the border colour
+                	//borderWidth : 1 //The stroke width of the bar in pixel
+                	//hoverBackgroundColor : //The fill colour of the bars when hovered
+                }]
+			},
+			options:{
+				scales:{
+					xAxes :[{
+						//barThickness : ,// set the each bar in pixels.If not set,the bars are sized automatically using barPer and barCATegory
+						//maxBarThickness : , //ensure the automatically sized bar are not sized thicker than this.
+						//only 	works if bar Thickness is not set(automatic sizing is enabled)
+					}]
+				}
+			}
+		})
+
+
+		var ctx = document.getElementById('line-chart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6', 'Day7'],
+    datasets: [{
+      label: 'delivered',
+      data: [12000, 19000, 3000, 17564, 6276, 376265, 76542],
+      backgroundColor: "rgba(153,255,51,0.4)"
+    }, {
+      label: 'Undeliver',
+      data: [10000, 18981, 2567, 16512, 51267,323123, 60785],
+      backgroundColor: "rgba(0,128,128,0.8)"
+    }]
+  }
+});
+		new Chart(document.getElementById("messageByOperator"), {
+    type: 'horizontalBar',
+    data: {
+      labels: ["VODAFONE", "TATA TELESERVICE", "RJIO", "RCOM", "MTNL"],
+      datasets: [
+        {
+          label: "Message delivered (Operator)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [2478,5267,734,784,433]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Message delivered in terminating circle'
+      }
+    }
+});
+new Chart(document.getElementById("polar-chart"), {
+    type: 'polarArea',
+    data: {
+      labels: ["Trans", "Gov", "Prom"],
+      datasets: [
+        {
+          label: "Message Type",
+          backgroundColor: ["#298AC8", "#3afb77","#e2e2e2"],
+          data: [2478,1200,7655]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Types of message delivered'
+      }
+    }
+});
+	}
+</script>
+</body>
+</html>
