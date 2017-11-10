@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"Dashboard\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n    numericInput(\"userId\",label = \"Enter the user Id\" , value = 737),\n    numericInput(\"VMN\",label = \"enter the VMN for search\" , value = 9222281818),\n    selectInput(\"hour\",label = \"select the hour\",choices = list(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23)\n                ,selected = 0 ),\n    selectInput(\"day\",label = \"select the day\",choices = list(\"1 june\" = 1 ,\n                                                                \"2 june\" = 2,\n                                                                \"3 june\" = 3,\n                                                                \"4 june\" = 4,\n                                                                \"5 june\" = 5,\n                                                                \"6 june\"= 6 ,\n                                                                \"7 june\" =7 ,\n                                                                \"8 june\" = 8, \"9 june\" = 9 ,\n                                                                \"10 june\" = 10 ,\"11 june\" = 11 ,\n                                                                \"12 june\" = 12 , \"13 june\" =13,\n                                                                \"14 june\" = 14 , \"15 june\" =15\n                                                               ),selected = 1),\n    dateRangeInput(\"dates\", label = h3(\"Date range\"),format = \"yyyy/mm/dd\")\n    \n    ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      dataTableOutput(\"table\")\n    )\n  )\n))\n",
+    "created" : 1498192839767.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2475232400",
+    "id" : "CF64C38A",
+    "lastKnownWriteTime" : 1498557586,
+    "last_content_update" : 1498557586050,
+    "path" : "~/officeWork/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

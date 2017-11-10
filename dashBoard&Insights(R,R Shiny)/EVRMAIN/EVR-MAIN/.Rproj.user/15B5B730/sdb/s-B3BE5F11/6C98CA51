@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Simple Linear Regression\n\n# Importing the dataset\ndataset = read.csv(file.choose(),header = T)\n\n# Splitting the dataset into the Training set and Test set\n# install.packages('caTools')\nlibrary(caTools)\nset.seed(123)\nsplit = sample.split(dataset$Salary, SplitRatio = 2/3)\ntraining_set = subset(dataset, split == TRUE)\ntest_set = subset(dataset, split == FALSE)\n\n# Feature Scaling\n# training_set = scale(training_set)\n# test_set = scale(test_set)\n\n# Fitting Simple Linear Regression to the Training set\nregressor = lm(formula = Salary ~ YearsExperience,\n               data = training_set)\n\n# Predicting the Test set results\ny_pred = predict(regressor, newdata = test_set)\n\n# Visualising the Training set results\nlibrary(ggplot2)\nggplot() +\n  geom_point(aes(x = training_set$YearsExperience, y = training_set$Salary),\n             colour = 'red') +\n  geom_line(aes(x = training_set$YearsExperience, y = predict(regressor, newdata = training_set)),\n            colour = 'blue') +\n  ggtitle('Salary vs Experience (Training set)') +\n  xlab('Years of experience') +\n  ylab('Salary')\n\n# Visualising the Test set results\n\nlibrary(ggplot2)\nggplot() +\n  geom_point(aes(x = test_set$YearsExperience, y = test_set$Salary),\n             colour = 'blue') +\n  geom_line(aes(x = training_set$YearsExperience, y = predict(regressor, newdata = training_set)),\n            colour = 'yellow') +\n  ggtitle('Salary vs Experience (Test set)') +\n  xlab('Years of experience') +\n  ylab('Salary')\n\n\n",
+    "created" : 1508914691328.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1132888379",
+    "id" : "6C98CA51",
+    "lastKnownWriteTime" : 1473674868,
+    "last_content_update" : 1508916070335,
+    "path" : "C:/Users/Aman Kumar/Desktop/Machine-learning/Machine Learning A-Z Template Folder/Part 2 - Regression/Section 4 - Simple Linear Regression/simple_linear_regression.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

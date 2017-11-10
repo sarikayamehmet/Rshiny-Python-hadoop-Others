@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(plotly)\ndf <- read.csv(\"https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv\")\ndf$hover <- with(df, paste(state, '<br>', \"Beef\", beef, \"Dairy\", dairy, \"<br>\",\n                           \"Fruits\", total.fruits, \"Veggies\", total.veggies,\n                           \"<br>\", \"Wheat\", wheat, \"Corn\", corn))\n# give state boundaries a white border\nl <- list(color = toRGB(\"white\"), width = 2)\n# specify some map projection/options\ng <- list(\n  scope = 'usa',\n  projection = list(type = 'albers usa'),\n  showlakes = TRUE,\n  lakecolor = toRGB('white')\n)\n\np <- plot_geo(df, locationmode = 'USA-states') %>%\n  add_trace(\n    z = ~total.exports, text = ~hover, locations = ~code,\n    color = ~total.exports, colors = 'Purples'\n  ) %>%\n  colorbar(title = \"Millions USD\") %>%\n  layout(\n    title = '2011 US Agriculture Exports by State<br>(Hover for breakdown)',\n    geo = g\n  )",
+    "created" : 1498733028696.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1917635294",
+    "id" : "8BCE3B34",
+    "lastKnownWriteTime" : 2323048667401253928,
+    "last_content_update" : 1498738405653,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

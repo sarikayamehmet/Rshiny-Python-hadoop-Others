@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"EVR Panel\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel( width = 3,\n      selectInput(\"MSISDN\",\"msisdn\",choices = list(\"917094985524\",\"919022257036\"),selected = \"917094985524\"),\n      dateRangeInput(\"datarange\",\"DATE\",format = \"yyyy-mm-dd\",start = Sys.Date()-10,\n                     end = Sys.Date()+10),\n      selectInput(\"clientId\",\"clientId\",choices = list(\"DM-BOISTR\",\"DM-ICICIL\"),selected = \"DM-BOISTR\"),\n      selectInput(\"interval\",\"Refresh Interval\",\n                  choices = c(\n                    \"30 seconds\" = 30,\n                    \"1 min\" = 60,\n                    \"2 min\" = 120 ,\n                    \"5 min\" =  300,\n                    \"10 min\" = 600\n                  ),selected = \"300\"),\n      selectInput(\"terminating_circle\",\"Terminating Circle\",choices = list(\"Mumbai\",\"Maharstra\"),\n                  selected = \"Mumbai\"),\n      selectInput(\"map_message_id\",\"MAP MESSAGE ID\" ,\n                  choices = list(\"004016071723575054313116\",\"004016071720350593742610\"),\n                  selected = \"004016071720350593742610\")\n      \n    ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"distPlot\")\n    )\n  )\n))\n",
+    "created" : 1501477990766.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2830604126",
+    "id" : "4D74656F",
+    "lastKnownWriteTime" : 1501482586,
+    "last_content_update" : 1501482586179,
+    "path" : "~/dashboard/EVRMAIN/EVR-MAIN/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

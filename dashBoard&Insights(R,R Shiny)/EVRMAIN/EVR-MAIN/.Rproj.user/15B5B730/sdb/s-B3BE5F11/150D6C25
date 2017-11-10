@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "a<- read.csv (\"/opt/AKASH/finalFile.csv\",header = F)\n\n\n\nlibrary(sqldf)\ndata_frame<-sqldf(\"SELECT V1, V2, COUNT(*) as Freq\n       FROM a\n      GROUP BY V1,V2\")\n\n\n\n",
+    "created" : 1503387500910.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "793132028",
+    "id" : "150D6C25",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1503398666959,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

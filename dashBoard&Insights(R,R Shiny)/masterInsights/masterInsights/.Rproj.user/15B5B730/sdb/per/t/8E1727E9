@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"Master Table Dashboard\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n     selectInput(inputId = \"terminatingOperator\", label = \"Select the Terminating Operator\",\n                 choices = c(\"BSNL\",\"IDEA\")\n    ),\n    selectInput(inputId = \"terminatingCircle\", label = \"Select the Terminating Circle\",\n                choices = c(\"Delhi\",\"Mumbai\")),\n    dateRangeInput(inputId =\"dateRangeID\",label = \"Date\",format = \"yyyy-mm-dd\")\n    ),\n\n    # Show a plot of the generated distributioinputn\n    mainPanel(\n      plotOutput(\"distPlot\")\n    )\n  )\n))\n",
+    "created" : 1498711805200.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2018337492",
+    "id" : "8E1727E9",
+    "lastKnownWriteTime" : 1498725596,
+    "last_content_update" : 1498725596907,
+    "path" : "~/dashboard/masterInsights/masterInsights/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

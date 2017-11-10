@@ -1,0 +1,9 @@
+{
+    "path" : "~/dashboard/EVRMAIN/EVR-MAIN",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

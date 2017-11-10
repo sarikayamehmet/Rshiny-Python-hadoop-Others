@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(RMySQL)\nmydb = dbConnect(MySQL(), user='root', password='d@em0n51',\n                 dbname='parser', host='localhost')\ndbListTables(mydb)\ndbListFields(mydb, 'master_copy')\n\nrs = dbSendQuery(mydb, \"select * from master_copy\")\n\ndata.frame <- fetch(rs , n = 12435696)\n\ndatsetFrame <- data.frame[c(\"terminatingOperator\",\"terminatingCircle\",\"procDate\")]\n\n\n\n\n",
+    "created" : 1498642097627.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1821500675",
+    "id" : "D4BDD539",
+    "lastKnownWriteTime" : 1498711738,
+    "last_content_update" : 1498711738581,
+    "path" : "~/dashboard/mySqlAndR/mySQL/RandMysql.R",
+    "project_path" : "RandMysql.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

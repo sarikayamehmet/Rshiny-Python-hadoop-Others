@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(data.table)\nlibrary(dplyr)\nshinyServer(function(input, output,session) {\nsm_main_detail1<-read.csv(\"evr_data/EVR_SM_DETAIL_201706012357293.csv\",header = T)\nsm_main_detail2<-read.csv(\"evr_data/EVR_SM_DETAIL_201706012357594.csv\",header = T) \nsm_mainDetail <- rbind(sm_main_detail1,sm_main_detail2)\n#write.csv(sm_mainDetail,\"mainDetail.csv\")\nsr_main1<- read.csv(\"evr_data/EVR_SR_MAIN_201706012357293.csv\",header = T)\nsr_main2 <- read.csv(\"evr_data/EVR_SR_MAIN_201706012357594.csv\",header = T)\nsr_main <- rbind (sr_main1 ,sr_main2)\n#write.csv(sr_main ,\"sr_main.csv\")\nsm_detail1 <- read.csv(\"evr_data/EVR_SM_DETAIL_201706012357293.csv\",header = T)\nsm_detail2 <- read.csv(\"evr_data/EVR_SM_DETAIL_201706012357594.csv\",header = T)\nsm_detail <- rbind(sm_detail1,sm_detail2)\n#write.csv(sm_detail,\"sm_detail.csv\")\nsm_mainDetail<-sm_mainDetail[ ,c(\"MAP_MESSAGE_ID\",\"DEST_VMSCADDR\")]\nsr_main <- sr_main[ ,c(\"MAP_MESSAGE_ID\",\"SM_STATUS\",\"SM_ERRCODE\")]\nsm_detail <- sm_detail[,c(\"MAP_MESSAGE_ID\",\"CAUSE\",\"RECORDTYPE\",\"EVENT\")]\nmergSRMainSMDetail <- merge(sm_mainDetail,sm_detail, by = c(\"MAP_MESSAGE_ID\"))\nmergewithSmMAIN <- merge (mergSRMainSMDetail, sr_main, by = c(\"MAP_MESSAGE_ID\"))\n#mergeDatawithSR <- merge (mergingSMDetailMain,sr_main , by = c(\"MAP_MESSAGE_ID\"))\nmergeDatawithSR <- as.data.frame(mergSRMainSMDetail)\n\n})\n",
+    "created" : 1499230155508.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2688089030",
+    "id" : "A1E1B050",
+    "lastKnownWriteTime" : 1499849382,
+    "last_content_update" : 1499849382702,
+    "path" : "~/dashboard/EVR/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

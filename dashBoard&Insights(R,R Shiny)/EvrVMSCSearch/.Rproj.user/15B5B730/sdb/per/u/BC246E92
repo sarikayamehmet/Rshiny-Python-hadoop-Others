@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "a <- mergSRMainSMDetail\na$DEST_VMSCADDR<- as.character(a$DEST_VMSCADDR)\nb<-  lookuptable[which(lookuptable$operator_circle == \"Delhi\"),]\nb$vmsc_no<- as.character(b$vmsc_no)\n#  c = merge(a,b,by = c(\"DEST_VMSCADDR\"),by.y =c(\"vmsc_no\"),all = TRUE)\n#  ab<- a[,b[agrep(DEST_VMSCADDR,vmsc_no)],by =.(DEST_VMSCADDR)]\na<-as.data.frame(a)\nb<- as.data.frame(b)\ncolnames(a)\ncolnames(b)\nf <- function(x) merge(x , b[agrep(x$DEST_VMSCADDR[1],b$vmsc_no),],all = TRUE)\nc<-do.call(rbind,by(a,a$DEST_VMSCADDR,f))\n\noptions(scipen = 999)\n ",
+    "created" : 1499923988468.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3679968000",
+    "id" : "BC246E92",
+    "lastKnownWriteTime" : 19140779460001857,
+    "last_content_update" : 1499925712140,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

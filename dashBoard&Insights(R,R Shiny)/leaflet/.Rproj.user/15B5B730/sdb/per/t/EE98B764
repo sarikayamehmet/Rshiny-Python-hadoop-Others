@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nlibrary(leaflet)\n## leafletOutput is used at the ui side to display the rendered map.\n\nshinyUI(fluidPage(\nheaderPanel(\"State wise message delivered\"),\n    leafletOutput(\"mymap\")\n  ))",
+    "created" : 1498798706040.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1464401930",
+    "id" : "EE98B764",
+    "lastKnownWriteTime" : 1499061847,
+    "last_content_update" : 1499061847014,
+    "path" : "~/dashboard/leaflet/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

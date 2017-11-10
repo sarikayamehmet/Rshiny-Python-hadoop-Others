@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n#library(mongolite)\nshinyServer(function(input, output,session) {\nterCirc = read.csv(\"C:/Users/Aman Kumar/Documents/dashboard/EVRMAIN/look-up-table/lookupTable.csv\",\n                   header = T)\n # EVR_MAIN <- mongo(collection = \"EVR_MAIN\",db = \"test\")\n\n\nobserve({\n  y <- unique(terCirc$operator_circle)\n  updateSelectInput(session,\"terminating_circle\",label = \"Terminating Circle\",choices = y,\n                    selected = \"Mumbai\")\n})\n  output$distPlot <- renderPlot({\n     getting_the_data <- EVR_MAIN$find('{\"MAP_MESSAGE_ID\" :\"004016071723580801727114\",\n                                       \"RECORDTYPE\":\"23\"}')\n\n  })\n \n\n})\n",
+    "created" : 1501477991132.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3801781749",
+    "id" : "1EB6F26C",
+    "lastKnownWriteTime" : 1501491599,
+    "last_content_update" : 1501491599278,
+    "path" : "~/dashboard/EVRMAIN/EVR-MAIN/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

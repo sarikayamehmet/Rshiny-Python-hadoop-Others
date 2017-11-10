@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(leaflet)\nlibrary(ggmap)\nyour.map <- leaflet() %>% addTiles()\nyour.map \n\ninstall.packages(\"magrittr\")\nlibrary(magrittr)\nlibrary(leaflet)\n  m <- leaflet() %>%\n    addTiles() %>%  # Add default OpenStreetMap map tiles\n    addMarkers(lng=28.38, lat= 77.12, popup=\"The birthplace of R\")\n  m\n",
+    "created" : 1498740036639.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "810860441",
+    "id" : "7D76AE4A",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1498741441705,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

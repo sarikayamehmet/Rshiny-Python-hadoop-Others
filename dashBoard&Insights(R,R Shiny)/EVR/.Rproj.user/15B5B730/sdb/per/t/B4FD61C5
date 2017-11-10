@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1499841911286.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B4FD61C5",
+    "lastKnownWriteTime" : 1499837939,
+    "last_content_update" : 1499841911286,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "A6A057BB",
+        "caption" : "mergSRMainSMDetail",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=mergSRMainSMDetail&cache_key=A6A057BB",
+        "displayedObservations" : 149258,
+        "environment" : "",
+        "object" : "mergSRMainSMDetail",
+        "preview" : 0,
+        "totalObservations" : 149258,
+        "variables" : 6
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

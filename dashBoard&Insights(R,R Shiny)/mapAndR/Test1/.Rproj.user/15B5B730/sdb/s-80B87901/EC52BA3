@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(leaflet)\n\nhotels <- read.table(text = \"Hotel Year  latitude        longitude\n                     A   2000  41.886337      -87.628472\n                     B   2005  41.88819       -87.635199\n                     C   2010  41.891113      -87.63301\", \n                     header = TRUE)\n\nshinyServer(function(input, output) {\n  \n  output$map <- renderLeaflet({\n    df <- hotels[hotels$Year == input$year,]  \n    leaflet()  %>%\n      addTiles() %>%\n      addMarkers(data = df)\n  })\n  \n})",
+    "created" : 1498731017862.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3261369816",
+    "id" : "EC52BA3",
+    "lastKnownWriteTime" : 1498739249,
+    "last_content_update" : 1498739250036,
+    "path" : "~/dashboard/mapAndR/Test1/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

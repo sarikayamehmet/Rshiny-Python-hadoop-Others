@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nlibrary(leaflet)\n\nshinyUI(fluidPage(\n  titlePanel(\"Hotel Map\"),\n  sidebarLayout(\n    sidebarPanel(\n      selectInput(\"year\", \n                  label = \"Choose Year:\",\n                  choices = c(2000,2005,2010),\n                  selected = 2000\n      )),\n    \n    mainPanel (leafletOutput(\"map\",\"100%\",300))\n    \n  )\n))",
+    "created" : 1498731017472.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "816885759",
+    "id" : "34D92A8D",
+    "lastKnownWriteTime" : 1498731063,
+    "last_content_update" : 1498731063139,
+    "path" : "~/dashboard/mapAndR/Test1/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

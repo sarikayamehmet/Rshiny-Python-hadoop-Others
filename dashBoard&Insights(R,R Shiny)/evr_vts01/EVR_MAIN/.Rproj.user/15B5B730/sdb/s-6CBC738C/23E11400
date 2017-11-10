@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\noptions(scipen = 999)\n\nsm_main1<- read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SM_MAIN_201706012357293.txt'\n                     ,header = F,\n                     ,stringsAsFactors = TRUE ,sep = \",\" )\nsm_main2 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SM_MAIN_201706012357594.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\nsm_main <- rbind(sm_main1,sm_main2)\nsm_detail1 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SM_DETAIL_201706012357293.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\nsm_detail2 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SM_DETAIL_201706012357594.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\nsm_detail <- rbind(sm_detail1,sm_detail2)\nsr_main1 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SR_MAIN_201706012357293.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\nsr_main2 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SR_MAIN_201706012357594.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\nsr_main <- rbind(sr_main1,sr_main2)\nsr_detail1 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SR_DETAIL_201706012357594.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\nsr_detail2 <-read.table('C:/Users/Aman Kumar/Desktop/EVR_newData/EVR_SR_DETAIL_201706012357293.txt'\n                      ,header = F,\n                      ,stringsAsFactors = TRUE ,sep = \",\" )\n\n\n#3201061723441320689604\n\nsr_detail <- rbind(sr_detail1,sr_detail2)\ncolnames(sm_main) <- c(\"SCTS\",\"SCMSGREF\",\"RECORDTYPE\",\"CAUSE\",\"EVENT\",\"LOGGINGTIME\",\n                        \"ACCESSMETHOD\",\"SMORIGADDR\",\"SMDESTADDR\",\"DISPLAYADDRVALUE\",\"ORIGADDR_TYPE\",\"DESTADDR_TYPE\",\n                        \"ORIG_IMSI\",\"ORIG_VMSC\",\"MSG_LEN\",\"PID\",\"DCS\",\"DSR_REQ\",\"PRIORITY\"\n                        ,\"CONCAT_INFO\",\"CLIENT_ID\",\"SUBS_TYPE\",\"APP_NUM\",\"VALIDITY_PERIOD\"\n                        ,\"DIALLED_NUM\",\"ROUTING_TYPE\",\"NODE_ID\",\"MAP_MESSAGE_ID\")\ncolnames(sm_detail) <- c(\"SCTS\",\"SCMSGREF\",\"RECORDTYPE\",\"CAUSE\",\"EVENT\",\n                          \"LOGGINGTIME\",\"DEST_IMSI\",\"DEST_VMSCADDR\",\"NUMOFDELATTEMPTS\",\n                          \"ACCESSMETHOD\",\"SMORIGADDR\",\"APP_NUM\",\"SMDESTADDR\",\"ROUTING_TYPE\"\n                          ,\"NODE_ID\",\"MAP_MESSAGE_ID\")\ncolnames(sr_main)<-c(\"SCTS\",\"SCMSGREF\",\"SRORIGADDR\",\"SRDESTADDR\",\"MSGID\",\"SR_SCTS\",\n                      \"SM_STATUS\",\"SM_ERRCODE\",\"CAUSE\",\"EVENT\",\"ACCESSMETHOD\",\"DIALLED_NUM\",\n                      \"LOGGINGTIME\",\"NODE_ID\",\"MAP_MESSAGE_ID\") \ncolnames(sr_detail)<- c(\"SCTS\",\"SCMSGREF\",\"CAUSE\",\"EVENT\",\"ACCESSMETHOD\",\"SRORIGADDR\",\n                         \"SRDESTADDR\",\"LOGGINGTIME\",\"NODE_ID\")\n\ntest_main <- sm_main [which(sm_main$MAP_MESSAGE_ID == \"2401061723570067996642\"),]\ntest_detail <- sm_detail[which(sm_detail$MAP_MESSAGE_ID == \"2401061723570067996642\"),]\nSMmain<- merge(test_main,test_detail, by = \"EVENT\")\ntest_srmain <- sr_main[which(sr_main$MAP_MESSAGE_ID  == \"2401061723570067996642\"),]\ntestSrdetail <- sr_detail[which(sr_detail$SCTS == \"170601235700\" ),]\nSRMAIN <- merge(test_srmain,testSrdetail,by = \"SCTS\")\nEVR <- merge(SMmain,sr_main, by = \"EVENT\")\n",
+    "created" : 1500353097545.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2504659924",
+    "id" : "23E11400",
+    "lastKnownWriteTime" : 1500542948,
+    "last_content_update" : 1500542948261,
+    "path" : "~/VerifyEvrData.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

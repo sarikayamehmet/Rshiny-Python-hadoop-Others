@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "files_names<- dir(\"C:/Users/Aman Kumar/Documents/direcWork/data\")\n\nmy_data_frame <- do.call(rbind,lapply(files_names,read.csv))\n\n\nlibrary(data.table)  \nfiles <- list.files(path = \"C:/Users/Aman Kumar/Documents/direcWork/data\",pattern = \".csv\",full.names = TRUE)\ntemp <- lapply(files, fread, sep=\",\")\ndata <- rbindlist( temp )\n",
+    "created" : 1499251715587.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2090349991",
+    "id" : "C6482B91",
+    "lastKnownWriteTime" : 32932997484183620,
+    "last_content_update" : 1499253619512,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

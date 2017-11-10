@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\n\nshinyServer(function(input, output) {\n\n  \n  tab1<-read.csv(\"tab1.csv\",header = T)\n  tab2<-read.csv(\"tab2.csv\",header = T)\n  tab3<-read.csv(\"tab3.csv\",header = T)\n  tab4<-read.csv(\"tab4.csv\",header = T)\n  tab5<-read.csv(\"tab5.csv\",header = T)\n  tab6<-read.csv(\"tab6.csv\",header = T)\n  \n  \n  \n  dataFormatFinal<-rbind(tab1,tab2,tab3,tab4,tab5,tab6)\n  \n  dataFormatFinal <- subset(dataFormatFinal, select = c(iUserId,day,time,Hour,iAllotedVMN,date))\n  dataFormatFinal$date <- as.Date(dataFormatFinal$date , format = \"yyyy/mm/dd\") \n    \n  #dataFormatFinalJune1<-dataFormatFinal[which(dataFormatFinal$day == 1 ),]\n  \"dataFormatFinalJune1<-dataFormatFinal[which(dataFormatFinal$day == input$day),]\n  dataFormatAisa <- dataFormatFinalJune1 [1:15,]\"\n  \n  output$table <- renderDataTable({\n    \n    #dataFormatFinalJune1<-dataFormatFinal[which(dataFormatFinal$day == input$day ),]\n    \n    dataFormatFinalHour<- dataFormatFinal[which(  # dataFormatFinal$day == input$day \n                                               #&\n                                                 dataFormatFinal$Hour == input$hour\n                                               & dataFormatFinal$iAllotedVMN == input$VMN\n                                               & dataFormatFinal$iUserId == input$userId\n                                               & dataFormatFinal$dtTime == input$slider_datetime\n                                               & as.Date(input$dates[2],format = \"yyyy-mm-dd\" ) >= dataFormatFinal$date \n                                               & as.Date(input$dates[1], format = \"yyyy-mm-dd\") <= dataFormatFinal$date \n                                               ),]\n    \n\n\n  })\n\n})\n",
+    "created" : 1498200254426.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3851754833",
+    "id" : "20F1DDA3",
+    "lastKnownWriteTime" : 1498557766,
+    "last_content_update" : 1498557766530,
+    "path" : "~/officeWork/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

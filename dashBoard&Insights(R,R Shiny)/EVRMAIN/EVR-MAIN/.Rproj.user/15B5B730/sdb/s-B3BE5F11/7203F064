@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(mongolite)\n",
+    "created" : 1501477998273.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "253307137",
+    "id" : "7203F064",
+    "lastKnownWriteTime" : 2,
+    "last_content_update" : 1501478036652,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
